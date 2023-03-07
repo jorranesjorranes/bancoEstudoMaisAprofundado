@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "TB_USUARIO_MODEL")
@@ -15,10 +16,15 @@ public class UsuarioModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotBlank(message = "O campo de nome não pode ficar em branco")
 	private String nome;
+	@NotBlank(message = "O campo de email não pode ficar em branco")
 	private String email;
+	@NotBlank(message = "O campo de telefone não pode ficar em branco")
 	private Integer telefone;
+	@NotBlank(message = "O campo de cpf não pode ficar em branco")
 	private String cpf;
+	@NotBlank(message = "O campo de saldo não pode ficar em branco")
 	private Double saldo;
 
 	public UsuarioModel(Integer id, String nome, String email, Integer telefone, String cpf, Double saldo) {
