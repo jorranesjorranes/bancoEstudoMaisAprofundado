@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.teste.bancoEstudoMaisAprofundado.entities.UsuarioModel;
 import com.teste.bancoEstudoMaisAprofundado.services.UsuarioService;
 
-
-
 @RestController
 @RequestMapping("/api-usuario")
 public class UsuarioController {
@@ -32,6 +30,16 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<UsuarioModel>> listarTodos() {
     	return ResponseEntity.status(HttpStatus.OK).body(usuarioService.findAll());
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> listarPorId(@PathVariable Integer id) {
+    	Optional<UsuarioModel> usuarioOptional = usuarioService.findById(id);
+    	if (!usuarioOptional.isPresent()) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Usuário para esse id não foi encontrado.");
+    	}
+    	
+		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.findById(id));
     }
     
     @PostMapping
